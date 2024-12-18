@@ -2,11 +2,15 @@
 :root {
     --primary-color: #2e5c4f;
     --secondary-color: #d7f0ee;
-    --background-color: #b3dad3;
+    --background-color: #8eb8b0;
     --text-color: #ccd6f6;
     --accent-color: #07332f;
     --white: #d3d6b1;
     --others: #25493f;
+}
+/* Couleur globale des titres */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--secondary-color);
 }
 
 /* Corps de la page */
@@ -130,63 +134,174 @@ main {
     height: 60px;
     margin-bottom: 10px;
 }
+
+
+/* Section Outils */
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
+    margin-top: 40px; /* Ajouter une marge en haut pour séparer les sections */
+}
+
+.tool-card {
+    text-align: center;
+}
+
+.tool-card img {
+    width: 60px; /* Ajustez la taille des images */
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+.tool-card p {
+    font-size: 1.1em;
+    color: -- var(--text-color);
+}
 /* Section Projets */
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+    gap: 20px; /* La séparation entre les cartes */
     margin-top: 20px;
+    background-color: var(--primary-color); /* Ajout d'un fond de section */
 }
 
+/* Carte du projet */
 .project-card {
-    background-color: var(--others);
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    perspective: 1000px;
+    margin: 10px; /* Ajouter une petite marge autour de chaque carte */
 }
 
-.project-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-}
-
-.project-image {
+/* Contenu de la carte (avant et arrière) */
+.project-inner {
+    position: relative;
     width: 100%;
-    height: 180px;
-    object-fit: cover;
+    height: 250px;
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease;
 }
 
-.project-content {
+/* Retourner la carte au hover */
+.project-card:hover .project-inner {
+    transform: rotateY(180deg);
+}
+
+/* Face Avant */
+.project-front,
+.project-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     padding: 15px;
 }
 
-.project-content h3 {
-    font-size: 1.2em;
-    color: var(--primary-dark-blue);
-    margin-bottom: 10px;
+/* Style Face Avant */
+.project-front {
+    background-color: var(--others);
+    color: var(--primary-green-dark);
 }
 
-.project-content p {
+/* Style Face Arrière */
+.project-back {
+    background-color: #333; /* Changer la couleur de la face arrière */
+    color: var(--white);
+    transform: rotateY(180deg);
+}
+
+.project-back h4 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.project-back p {
     font-size: 0.9em;
-    color: var(--text-gray);
     margin-bottom: 15px;
 }
 
-.project-content .button {
+.project-back .button {
     display: inline-block;
-    padding: 10px 15px;
-    background-color: var(--primary-dark-blue);
+    padding: 8px 12px;
+    background-color: var(--primary-color);
     color: var(--white);
     text-decoration: none;
-    font-size: 0.9em;
     border-radius: 5px;
+    font-size: 0.9em;
     transition: background-color 0.3s ease;
 }
 
-.project-content .button:hover {
-    background-color: var(--primary-medium-blue);
+.project-back .button:hover {
+    background-color: var(--primary-color);
 }
+
+/* Section CV */
+#cv {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: var(--primary-color); /* Fond léger pour la section */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#cv h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: var(--secondary-color);
+}
+
+#cv p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    color: white;
+}
+
+/* Boutons */
+.button {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 15px 30px;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    background-color: var(--others); /* Couleur principale */
+    border: 2px solid --others; /* Bordure assortie */
+    border-radius: 5px;
+    text-decoration: none;
+    transition: transform 0.2s, background-color 0.3s, color 0.3s;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: var(--primary-color); /* Couleur au survol */
+    color: var(--others); /* Texte inversé */
+    transform: scale(1.1); /* Légère mise en avant */
+}
+
+.button:active {
+    transform: scale(0.95); /* Réduction subtile au clic */
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    #cv {
+        padding: 20px 10px;
+    }
+
+    .button {
+        font-size: 0.9em;
+        padding: 10px 20px;
+    }
+}
+
 
 /* Responsiveness */
 @media (max-width: 768px) {
