@@ -171,8 +171,10 @@ main {
 
 /* Carte du projet */
 .project-card {
+    position: relative;
     perspective: 1000px;
     margin: 10px; /* Ajouter une petite marge autour de chaque carte */
+    overflow: hidden; /* Empêche les débordements au-delà des limites de la carte */
 }
 
 /* Contenu de la carte (avant et arrière) */
@@ -182,6 +184,7 @@ main {
     height: 250px;
     transform-style: preserve-3d;
     transition: transform 0.8s ease;
+    transform-origin: center; /* Point de rotation centré */
 }
 
 /* Retourner la carte au hover */
@@ -202,7 +205,8 @@ main {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 15px;
+    padding: 0; /* Supprime les marges internes */
+    box-sizing: border-box; /* Inclut padding et border dans les dimensions */
 }
 
 /* Style Face Avant */
@@ -242,6 +246,7 @@ main {
 .project-back .button:hover {
     background-color: var(--primary-color);
 }
+
 
 /* Section CV */
 #cv {
@@ -290,6 +295,21 @@ main {
     transform: scale(0.95); /* Réduction subtile au clic */
 }
 
+/* Style pour le lien LinkedIn */
+.linkedin-link {
+    color: var(--text-color); /* Couleur bleue spécifique de LinkedIn */
+    font-weight: bold; /* Met en valeur le lien */
+    text-decoration: none; /* Supprime le soulignement */
+    transition: color 0.3s ease;
+}
+
+.linkedin-link:hover {
+    color: var(--text-color); /* Couleur plus foncée au survol */
+    text-decoration: underline; /* Ajoute un soulignement au survol */
+}
+
+
+
 /* Responsiveness */
 @media (max-width: 768px) {
     #cv {
@@ -303,14 +323,3 @@ main {
 }
 
 
-/* Responsiveness */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 200px;
-    }
-
-    main {
-        margin-left: 220px;
-        width: calc(100% - 220px);
-    }
-}
